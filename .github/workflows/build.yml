@@ -1,0 +1,52 @@
+name: Build Thesis PDF
+
+on:
+  push:
+    branches: [ "master" ]
+    paths-ignore:
+      - '**.pdf'
+      - 'README.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 1. Markdown -> LaTeX変換 (参考文献処理付き)
+      - name: Convert Markdown to LaTeX body
+        uses: docker://pandoc/core:3.1
+        with:
+          args: >-
+            --from markdown
+            --to latex
+            --output src/body.tex
+            --natbib
+            src/thesis.md
+
+      # 2. LaTeXコンパイル (日本語対応, main.tex基準)
+      - name: Compile LaTeX
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: src
+          latexmk_use_lualatex: false
+          latexmk_shell_escape: true
+          args: "-interaction=nonstopmode"
+
+      # 3. PDFをルートに移動
+      - name: Move PDF to root
+        run: mv src/main.pdf ./thesis.pdf
+
+      # 4. Gitへコミット
+      - name: Commit PDF
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Auto-generate PDF [skip ci]"
+          file_pattern: thesis.pdf
