@@ -28,6 +28,7 @@ jobs:
             --to latex
             --output src/body.tex
             --natbib
+            --lua-filter src/filters/wide-figure.lua
             src/thesis.md
 
       # 2. LaTeXコンパイル (日本語対応, main.tex基準)
