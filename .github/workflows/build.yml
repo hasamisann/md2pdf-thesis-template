@@ -2,7 +2,7 @@ name: Build Thesis PDF
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "main" ]
     paths-ignore:
       - '**.pdf'
       - 'README.md'
@@ -50,4 +50,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "Auto-generate PDF [skip ci]"
-          file_pattern: thesis.pdf
+          file_pattern: thesis.pdf src/body.tex

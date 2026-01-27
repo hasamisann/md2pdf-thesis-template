@@ -1,24 +1,21 @@
-\documentclass[twocolumn,a4paper,uplatex,dvipdfmx]{jsarticle}
+\documentclass[twocolumn,a4paper,uplatex,dvipdfmx,titlepage]{jsarticle}
 \usepackage[margin=18mm]{geometry}
 
 % パッケージ
 \usepackage{graphicx}
+\setkeys{Gin}{keepaspectratio}
 \usepackage{hyperref}
 \usepackage{amsmath,amssymb}
 \usepackage{url}
 \usepackage[numbers]{natbib}
 
-\title{\bfseries 卒論タイトルをここに入力}
-\author{%
-学籍番号 氏名\\
-○○研究室
-}
-\date{} % 日付を出さない場合は空にする
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 \begin{document}
 
-% タイトルの出力
-\maketitle
+% 表紙の読み込み
+\input{cover.tex}
 
 % 本文の読み込み
 \IfFileExists{body.tex}{\input{body.tex}}{
