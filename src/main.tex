@@ -9,6 +9,26 @@
 \usepackage{url}
 \usepackage[numbers]{natbib}
 
+% ソースコードの設定
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+    basicstyle={\ttfamily\footnotesize},
+    frame=tRBl,
+    framesep=10pt,
+    breaklines=true,
+    linewidth=\textwidth,
+    numbers=left,
+    stepnumber=1,
+    numberstyle=\tiny,
+    tabsize=2,
+    commentstyle=\color{gray},
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    captionpos=t
+}
+\renewcommand{\lstlistingname}{ソースコード}
+
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
@@ -26,5 +46,8 @@
 % 参考文献リストの出力
 \bibliographystyle{junsrt}
 \bibliography{references}
+
+% 付録の出力
+\IfFileExists{appendix.tex}{\input{appendix.tex}}{}
 
 \end{document}
